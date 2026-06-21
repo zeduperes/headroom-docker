@@ -17,6 +17,8 @@ curl http://127.0.0.1:8787/readyz
 Dashboard web: http://127.0.0.1:8787/dashboard
 Métricas (Prometheus): http://127.0.0.1:8787/metrics
 
+Estado do proxy (savings, memória, cache de licença, telemetria) é persistido no volume Docker `headroom-data`, então sobrevive a `docker compose down`/atualizações de imagem.
+
 ## Configuração de ambiente
 
 Copie `.env.example` para `.env`. Nenhuma API key é necessária para uso com assinatura (Claude Pro / ChatGPT Plus) — a autenticação é feita via OAuth pelas próprias CLIs/extensões, que o headroom repassa adiante.

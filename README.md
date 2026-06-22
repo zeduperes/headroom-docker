@@ -53,3 +53,13 @@ wire_api = "responses"
 Sem `env_key`: o Codex cai de volta no OAuth bearer + `ChatGPT-Account-ID` da assinatura em vez de exigir API key (suporte adicionado no headroom a partir da v0.24.0; ver [issue #773](https://github.com/chopratejas/headroom/issues/773)).
 
 Reinicie o VSCode para aplicar.
+
+## Usando a CLI do headroom
+
+O serviço `headroom-cli` roda comandos pontuais da CLI (ex.: inspecionar config, ver savings) contra o mesmo estado (`headroom-data`) usado pelo proxy, e está num profile separado (`cli`) para não subir junto com `docker compose up -d`. Por padrão ele lê a config OAuth do Claude/Codex/Gemini do seu `$HOME`; defina `HEADROOM_HOST_HOME` no `.env` apenas se precisar apontar para outro diretório:
+
+```bash
+docker compose --profile cli run --rm headroom-cli <comando>
+```
+
+Por padrão (sem `<comando>`) ele mostra o `--help`. O diretório atual é montado em `/workspace` (configurável via `HEADROOM_WORKSPACE`).

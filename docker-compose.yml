@@ -1,4 +1,30 @@
 services:
+  headroom-cli:
+    image: ghcr.io/chopratejas/headroom:latest
+    container_name: headroom-cli
+    profiles: ["cli"]
+    entrypoint: ["headroom"]
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+
+    env_file:
+      - .env
+
+    environment:
+      HOME: /tmp/headroom-home
+      HEADROOM_WORKSPACE_DIR: /tmp/headroom-home/.headroom
+      HEADROOM_CONFIG_DIR: /tmp/headroom-home/.headroom/config
+
+    volumes:
+      - ${HEADROOM_WORKSPACE:-.}:/workspace
+      - headroom-data:/tmp/headroom-home/.headroom
+      - ${HEADROOM_HOST_HOME:-${HOME}}/.claude:/tmp/headroom-home/.claude
+      - ${HEADROOM_HOST_HOME:-${HOME}}/.codex:/tmp/headroom-home/.codex
+      - ${HEADROOM_HOST_HOME:-${HOME}}/.gemini:/tmp/headroom-home/.gemini
+
+    command: ["--help"]
+
   headroom-proxy:
     image: ghcr.io/chopratejas/headroom:latest
     container_name: headroom-proxy

@@ -10,8 +10,13 @@ services:
     env_file:
       - .env
 
+    environment:
+      HOME: /tmp/headroom-home
+      HEADROOM_WORKSPACE_DIR: /tmp/headroom-home/.headroom
+      HEADROOM_CONFIG_DIR: /tmp/headroom-home/.headroom/config
+
     volumes:
-      - headroom-data:/root/.headroom
+      - headroom-data:/tmp/headroom-home/.headroom
 
     healthcheck:
       test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:8787/readyz"]

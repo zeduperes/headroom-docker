@@ -46,7 +46,7 @@ model_provider = "headroom"
 
 [model_providers.headroom]
 name = "Codex via Headroom proxy"
-base_url = "http://localhost:8787"
+base_url = "http://localhost:8787/v1"
 wire_api = "responses"
 ```
 
